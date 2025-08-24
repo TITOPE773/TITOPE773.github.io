@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicio de Pintura - J.BELLS</title>
+  <style>/* Reset básico */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Body */
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f4f7fb;
+  color: #333;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* =========================
+   Header Naranja Súper Compacto
+========================= */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #ff5722;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px; /* padding reducido */
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    z-index: 1000;
+    height: 45px; /* altura más pequeña */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.logo img {
+    width: 28px; /* logo más pequeño */
+    height: 28px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+.brand {
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: #fff;
+    font-size: 14px; /* texto más pequeño */
+}
+
+nav {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: .9;
+    font-size: 13px; /* enlaces más pequeños */
+    transition: opacity 0.2s;
+}
+nav a:hover { opacity: 1; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+              url("https://img.freepik.com/foto-gratis/pared-textura-pintada-colorido_53876-13377.jpg") no-repeat center/cover;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+.hero h2 { font-size: 2.8rem; margin-bottom: 15px; animation: fadeIn 1s ease-in; }
+.hero p { font-size: 1.3rem; margin-bottom: 20px; animation: fadeIn 1.5s ease-in; }
+.hero button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  background: #ff9800;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.hero button:hover { 
+  background: #e68900;
+  transform: scale(1.05);
+}
+
+/* Servicios */
+#servicios {
+  padding: 80px 20px;
+  text-align: center;
+}
+#servicios h2 { font-size: 2rem; margin-bottom: 30px; }
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  font-size: 18px;
+  width: 220px;
+  transition: transform 0.3s;
+  text-align: center;
+}
+.card:hover { transform: translateY(-8px); }
+
+/* Galería slider */
+#galeria {
+  padding: 80px 20px;
+  text-align: center;
+}
+#galeria h2 { margin-bottom: 30px; font-size: 2rem; }
+.slider {
+  display: flex;
+  overflow: hidden;
+  width: 90%;
+  margin: auto;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: transform 0.5s ease-in-out;
+}
+.slider img {
+  width: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+/* Reserva */
+.form-box {
+  background: white;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  text-align: center;
+  max-width: 400px;
+}
+.form-box input {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 15px;
+}
+.form-box button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #ff5722;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s;
+}
+.form-box button:hover { 
+  background: #e64a19;
+  transform: scale(1.05);
+}
+
+/* Testimonios */
+#testimonios {
+  padding: 80px 20px;
+  background: #fbe9e7;
+  text-align: center;
+}
+#testimonios h2 { font-size: 2rem; margin-bottom: 40px; }
+.testimonials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.testimonial {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  width: 250px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  text-align: center;
+  transition: transform 0.3s;
+}
+.testimonial:hover { transform: translateY(-6px); }
+.testimonial img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+/* Contacto */
+#contacto {
+  padding: 60px 20px;
+  text-align: center;
+}
+#contacto h2 { margin-bottom: 15px; }
+
+/* Footer */
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   Responsive para móviles
+=========================== */
+@media (max-width: 992px) {
+  .hero h2 { font-size: 2.4rem; }
+  .hero p { font-size: 1.2rem; }
+  .cards { gap: 20px; }
+  .card { width: 180px; font-size: 16px; }
+  .form-box { width: 90%; padding: 25px; }
+  .form-box input, .form-box button { width: 95%; font-size: 15px; }
+  .testimonial { width: 220px; }
+}
+
+@media (max-width: 768px) {
+  header { flex-direction: column; gap: 3px; padding: 5px 10px; height: auto; }
+  header nav { display: flex; flex-wrap: wrap; justify-content: center; }
+  .hero h2 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .cards { flex-direction: column; align-items: center; }
+  .card { width: 80%; margin-bottom: 20px; }
+  .testimonial { width: 80%; margin-bottom: 20px; }
+}
+
+@media (max-width: 480px) {
+  .hero h2 { font-size: 1.6rem; }
+  .hero p { font-size: 0.95rem; }
+  .hero button { font-size: 16px; padding: 10px 20px; }
+  .card { width: 90%; padding: 18px; font-size: 15px; }
+  .form-box input, .form-box button { font-size: 14px; padding: 10px; }
+  .testimonial { width: 90%; padding: 15px; font-size: 14px; }
+}
+
+
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="img/63750.png" alt="Logo">
+      <h1>J.BELLS Pintura</h1>
+    </div>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#galeria">Galería</a>
+      <a href="#reserva">Reservar</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Transformamos tus espacios 🎨</h2>
+    <p>Acabados de calidad en interiores y exteriores.</p>
+    <a href="#reserva"><button>Reservar ahora</button></a>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios">
+    <h2>Nuestros Servicios</h2>
+    <div class="cards">
+      <div class="card">🏠 Pintura Exterior</div>
+      <div class="card">🎨 Pintura Interior</div>
+      <div class="card">🪑 Restauración de Muebles</div>
+    </div>
+  </section>
+
+  <!-- Galería slider -->
+  <section id="galeria">
+    <h2>Galería de Trabajos</h2>
+    <div class="slider">
+      <img src="https://via.placeholder.com/600x400?text=Antes" alt="Antes">
+      <img src="https://via.placeholder.com/600x400?text=Después" alt="Después">
+      <img src="https://via.placeholder.com/600x400?text=Proyecto+1" alt="Proyecto 1">
+    </div>
+  </section>
+
+  <!-- Reserva -->
+  <section id="reserva" class="form-box">
+    <h2>Reserva tu cita</h2>
+    <label for="fecha">Selecciona la fecha:</label>
+    <input type="date" id="fecha">
+
+    <label for="hora">Selecciona la hora:</label>
+    <input type="time" id="hora">
+
+    <button onclick="enviar()">Reservar por WhatsApp</button>
+  </section>
+
+  <!-- Testimonios -->
+  <section id="testimonios">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <img src="https://via.placeholder.com/80" alt="Cliente 1">
+        <p>"Excelente servicio y acabado profesional."</p>
+        <h4>- Ana G.</h4>
+      </div>
+      <div class="testimonial">
+        <img src="https://via.placeholder.com/80" alt="Cliente 2">
+        <p>"Mi casa nunca se vio tan bien, totalmente recomendable."</p>
+        <h4>- Carlos M.</h4>
+      </div>
+      <div class="testimonial">
+        <img src="https://via.placeholder.com/80" alt="Cliente 3">
+        <p>"Rápido, eficiente y con gran detalle en la pintura."</p>
+        <h4>- Lucía R.</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>📞 727-105-9214</p>
+    <p>📧 juanBells@gmail.com</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 J.BELLS Pintura - Todos los derechos reservados
+  </footer>
+
+  <!-- Script -->
+  <script>
+    function enviar() {
+      const fecha = document.getElementById("fecha").value;
+      const hora = document.getElementById("hora").value;
+
+      if (!fecha || !hora) {
+        alert("Por favor selecciona fecha y hora antes de reservar.");
+        return;
+      }
+
+      const mensaje = `Hola, me gustaría contratar el servicio de Pintura el día ${fecha} a las ${hora} hrs.`;
+      const numero = "527271059214"; 
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, "_blank");
+    }
+
+    // Slider simple
+    const slider = document.querySelector(".slider");
+    let index = 0;
+    setInterval(() => {
+      if(!slider) return;
+      index++;
+      if(index >= slider.children.length) index = 0;
+      slider.style.transform = `translateX(-${index*100}%)`;
+    }, 3000);
+  </script>
+</body>
+</html>
