@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animación de Texto</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      color: white;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 12vw; /* Tamaño inicial relativo al ancho de pantalla */
+      position: absolute;
+      animation: mover 3s ease forwards;
+    }
+
+    @keyframes mover {
+      0% {
+        font-size: 12vw;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      100% {
+        font-size: 5vw; /* Se hace más pequeño pero sigue siendo proporcional */
+        top: 5%;
+        left: 5%;
+        transform: translate(0, 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Mi Texto</h1>
+</body>
+</html>

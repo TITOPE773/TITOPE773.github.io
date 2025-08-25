@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicio de Electricidad - J.BELLS</title>
+  <style>
+/* Reset básico */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f4f7fb;
+  color: #333;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* =========================
+   Header Azul Súper Compacto
+========================= */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #1565c0;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    z-index: 1000;
+    height: 45px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.logo img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+.brand {
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: #fff;
+    font-size: 14px;
+}
+
+nav {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: .9;
+    font-size: 13px;
+    transition: opacity 0.2s;
+}
+nav a:hover { opacity: 1; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+         url("eletricidad.jpg") no-repeat center/cover;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+.hero h2 { font-size: 2.8rem; margin-bottom: 15px; animation: fadeIn 1s ease-in; }
+.hero p { font-size: 1.3rem; margin-bottom: 20px; animation: fadeIn 1.5s ease-in; }
+.hero button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  background: #1e88e5;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.hero button:hover { 
+  background: #1565c0;
+  transform: scale(1.05);
+}
+
+/* Servicios (nuevos cards hover) */
+.card-group {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.card {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  transition: 0.5s ease;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s ease;
+}
+
+.card .layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.card .info {
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  transition: 0.5s ease;
+  color: white;
+}
+
+.card .info h1 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.card .info button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #ff4b5c;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.card .info button:hover {
+  background: #ff1e38;
+}
+
+/* Hover effects */
+.card:hover {
+  transform: scale(1.05);
+}
+.card:hover img {
+  transform: scale(1.1);
+}
+.card:hover .layer {
+  opacity: 1;
+}
+.card:hover .info {
+  bottom: 0;
+  opacity: 1;
+}
+.card-group:hover > .card:not(:hover) {
+  filter: blur(3px);
+}
+
+/* Texto animado */
+.electric {
+  color: cyan;
+  text-shadow: 0 0 5px cyan, 0 0 15px cyan, 0 0 25px blue;
+  animation: flicker 2s infinite;
+}
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.2; }
+}
+
+/* Galería slider */
+#galeria {
+  padding: 80px 20px;
+  text-align: center;
+}
+#galeria h2 { margin-bottom: 30px; font-size: 2rem; }
+.slider {
+  display: flex;
+  overflow: hidden;
+  width: 90%;
+  margin: auto;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: transform 0.5s ease-in-out;
+}
+.slider img {
+  width: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+/* Reserva */
+.form-box {
+  background: white;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  text-align: center;
+  max-width: 400px;
+}
+.form-box input,
+.form-box select {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 15px;
+}
+.form-box button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #1565c0;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s;
+}
+.form-box button:hover { 
+  background: #0d47a1;
+  transform: scale(1.05);
+}
+
+/* Testimonios */
+#testimonios {
+  padding: 80px 20px;
+  background: #e3f2fd;
+  text-align: center;
+}
+#testimonios h2 { font-size: 2rem; margin-bottom: 40px; }
+.testimonials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.testimonial {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  width: 250px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  text-align: center;
+  transition: transform 0.3s;
+}
+.testimonial:hover { transform: translateY(-6px); }
+.testimonial img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+/* Contacto */
+#contacto {
+  padding: 60px 20px;
+  text-align: center;
+}
+#contacto h2 { margin-bottom: 15px; }
+
+/* Footer */
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero h2 { font-size: 2.4rem; }
+  .hero p { font-size: 1.2rem; }
+  .form-box { width: 90%; padding: 25px; }
+  .testimonial { width: 220px; }
+}
+@media (max-width: 768px) {
+  header { flex-direction: column; gap: 3px; padding: 5px 10px; height: auto; }
+  header nav { display: flex; flex-wrap: wrap; justify-content: center; }
+  .hero h2 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .card-group { flex-direction: column; align-items: center; gap: 20px; }
+  .card { width: 90%; height: 350px; }
+  .testimonial { width: 80%; margin-bottom: 20px; }
+}
+@media (max-width: 480px) {
+  .hero h2 { font-size: 1.6rem; }
+  .hero p { font-size: 0.95rem; }
+  .hero button { font-size: 16px; padding: 10px 20px; }
+  .form-box input, .form-box button, .form-box select { font-size: 14px; padding: 10px; }
+  .testimonial { width: 90%; padding: 15px; font-size: 14px; }
+}
+ .brand {
+     font-size: 30px;
+      background: linear-gradient(90deg, red, orange, yellow);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: brush 4s infinite linear;
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+    @keyframes brush {
+      0% {background-position: -200px 0;}
+      100% {background-position: 200px 0;}
+    }
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <h1 class="brand" >J.BELLS Electricidad</h1>
+    </div>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#galeria">Galería</a>
+      <a href="#reserva">Reservar</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Soluciones Eléctricas Profesionales ⚡</h2>
+    <p>Instalaciones seguras y mantenimiento confiable.</p>
+    <a href="#reserva"><button>Reservar ahora</button></a>
+  </section><br>
+
+  <!-- Servicios -->
+  <section id="servicios">
+    <h1 style="text-align: center;">Nuestros Servicios</h1>
+    <div class="card-group">
+
+      <div class="card">
+        <img src="eletric.webp" alt="Instalaciones Eléctricas">
+        <div class="layer"></div>
+        <div class="info">
+          <h1 class="electric">Instalaciones Eléctricas</h1>
+          <button>Explore</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="OIP.webp" alt="Reparaciones y Mantenimiento">
+        <div class="layer"></div>
+        <div class="info">
+          <h1 class="electric">Reparaciones y Mantenimiento</h1>
+          <button>Explore</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="uo.webp" alt="Domótica y Automatización">
+        <div class="layer"></div>
+        <div class="info">
+          <h1 class="electric">Instalación de fotoseldas</h1>
+          <button>Reservar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Galería slider -->
+  <section id="galeria">
+    <h2>Galería de Trabajos</h2>
+    <div class="slider">
+      <img src="https://via.placeholder.com/600x400?text=Instalación" alt="Instalación">
+      <img src="https://via.placeholder.com/600x400?text=Reparación" alt="Reparación">
+      <img src="https://via.placeholder.com/600x400?text=Proyecto+Eléctrico" alt="Proyecto Eléctrico">
+    </div>
+  </section>
+
+  <!-- Reserva -->
+  <section id="reserva" class="form-box">
+    <h2>Reserva tu cita</h2>
+
+    <label for="servicio">Selecciona el servicio:</label>
+    <select id="servicio">
+      <option value="">-- Selecciona una opción --</option>
+      <option value="Instalaciones Eléctricas">Instalaciones Eléctricas</option>
+      <option value="Reparaciones y Mantenimiento">Reparaciones y Mantenimiento</option>
+      <option value="Domótica y Automatización">Instalación de fotoseldas</option>
+    </select>
+
+    <label for="fecha">Selecciona la fecha:</label>
+    <input type="date" id="fecha">
+
+    <label for="hora">Selecciona la hora:</label>
+    <input type="time" id="hora">
+
+    <button onclick="enviar()">Reservar por WhatsApp</button>
+  </section>
+
+  <!-- Testimonios -->
+  <section id="testimonios">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <img src="https://via.placeholder.com/80" alt="Cliente 1">
+        <p>"Excelente servicio, dejaron todo funcionando perfecto."</p>
+        <h4>- Mario S.</h4>
+      </div>
+      <div class="testimonial">
+        <img src="https://via.placeholder.com/80" alt="Cliente 2">
+        <p>"Muy profesionales, solucionaron rápido mi problema eléctrico."</p>
+        <h4>- Laura P.</h4>
+      </div>
+      <div class="testimonial">
+        <img src="https://via.placeholder.com/80" alt="Cliente 3">
+        <p>"Los recomiendo al 100%, trabajo seguro y confiable."</p>
+        <h4>- José R.</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>📞 727-105-9214</p>
+    <p>📧 juanBells@gmail.com</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 J.BELLS Electricidad - Todos los derechos reservados
+  </footer>
+
+  <!-- Script -->
+  <script>
+    function enviar() {
+      const servicio = document.getElementById("servicio").value;
+      const fecha = document.getElementById("fecha").value;
+      const hora = document.getElementById("hora").value;
+
+      if (!servicio) {
+        alert("Por favor selecciona un servicio antes de reservar.");
+        return;
+      }
+      if (!fecha || !hora) {
+        alert("Por favor selecciona fecha y hora antes de reservar.");
+        return;
+      }
+
+      const mensaje = `Hola, me gustaría contratar el servicio de *${servicio}* el día ${fecha} a las ${hora} hrs.`;
+      const numero = "527271059214"; 
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, "_blank");
+    }
+
+    // Slider simple
+    const slider = document.querySelector(".slider");
+    let index = 0;
+    setInterval(() => {
+      if(!slider) return;
+      index++;
+      if(index >= slider.children.length) index = 0;
+      slider.style.transform = `translateX(-${index*100}%)`;
+    }, 3000);
+  </script>
+</body>
+</html>
